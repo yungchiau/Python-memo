@@ -23,7 +23,7 @@ report_logger.setLevel(logging.DEBUG)
 #--------------------------------------------------------------------------------------------------
 handler = logging.FileHandler(filename=f'{log_loc}report.log')
 
-# format example: 2022-04-13 17:21:39] - report - DEBUG - helloooooooooooo!
+# format example: [2022-04-13 17:21:39] - report - DEBUG - helloooooooooooo!
 formatter = logging.Formatter('[%(asctime)s] - %(name)s - %(levelname)s - %(message)s',\
                                   datefmt='%Y-%m-%d %H:%M:%S')
 handler.setFormatter(formatter)
