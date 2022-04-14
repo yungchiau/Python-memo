@@ -10,7 +10,7 @@ logging.warning('warning message')
 logging.error('error message')
 logging.critical('critical message')
 
-## 3. Set a customer logger
+##＃ 2-1. Set a customer logger
 import logging
 
 # logger for a report, for this setting, we can set several logger in a class and call it
@@ -37,3 +37,28 @@ report_logger.critical('critical message')
 
 # For config logging, we can use "logging.config.fileConfig()"
 # except using "logging.basicConfig".
+
+#＃　3.　A function
+def reportLogger(dir, cl_id):
+    """ dir = the directory; cl_id = sample id """
+    import logging
+    log_loc = f'{dir}/{cl_id}/'
+    
+    report_logger: logging.Logger = logging.getLogger(name="report")
+    handler = logging.FileHandler(filename=f'{log_loc}report.log')
+    formatter = logging.Formatter('[%(asctime)s] - %(name)s - %(levelname)s - %(message)s',\
+                                  datefmt='%Y-%m-%d %H:%M:%S')
+    handler.setFormatter(formatter)
+    
+    report_logger.setLevel(logging.DEBUG)
+    report_logger.addHandler(handler)
+    
+    return report_logger
+    
+    """
+    report_logger.debug('debug message')
+    report_logger.info('info message')
+    report_logger.warning('warning message')
+    report_logger.error('error message')
+    report_logger.critical('critical message')
+    """
