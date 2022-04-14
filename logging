@@ -1,0 +1,39 @@
+## 1. Official document
+https://docs.python.org/3/library/logging.html
+
+## 2. Simple setting
+import logging
+
+logging.debug('debug message')
+logging.info('info message')
+logging.warning('warning message')
+logging.error('error message')
+logging.critical('critical message')
+
+## 3. Set a customer logger
+import logging
+
+# logger for a report, for this setting, we can set several logger in a class and call it
+#-------------------------------------------------------------------------------------------------
+report_logger = logging.getLogger(name='report')
+report_logger.setLevel(logging.DEBUG)
+
+# logging.StreamHandler() = show log info on terminal
+# logging.FileHandler() = save log info into a file
+#--------------------------------------------------------------------------------------------------
+handler = logging.FileHandler(filename=f'{log_loc}report.log')
+
+# format example: 2022-04-13 17:21:39] - report - DEBUG - helloooooooooooo!
+formatter = logging.Formatter('[%(asctime)s] - %(name)s - %(levelname)s - %(message)s',\
+                                  datefmt='%Y-%m-%d %H:%M:%S')
+handler.setFormatter(formatter)
+report_logger.addHandler(handler)
+
+report_logger.debug('debug message')
+report_logger.info('info message')
+report_logger.warning('warning message')
+report_logger.error('error message')
+report_logger.critical('critical message')
+
+# For config logging, we can use "logging.config.fileConfig()"
+# except using "logging.basicConfig".
