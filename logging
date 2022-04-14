@@ -1,7 +1,9 @@
 ## 1. Official document
+#-------------------------------------------------------------------------------------------------
 https://docs.python.org/3/library/logging.html
 
 ## 2. Simple setting
+#-------------------------------------------------------------------------------------------------
 import logging
 
 logging.debug('debug message')
@@ -11,6 +13,7 @@ logging.error('error message')
 logging.critical('critical message')
 
 ##＃ 2-1. Set a customer logger
+#-------------------------------------------------------------------------------------------------
 import logging
 
 # logger for a report, for this setting, we can set several logger in a class and call it
@@ -38,7 +41,56 @@ report_logger.critical('critical message')
 # For config logging, we can use "logging.config.fileConfig()"
 # except using "logging.basicConfig".
 
+### 2-2. file config, example from python docs
+#-------------------------------------------------------------------------------------------------
+import logging
+import logging.config
+
+logging.config.fileConfig('logging.conf')
+
+# create logger
+logger = logging.getLogger('simpleExample')
+
+# 'application' code
+logger.debug('debug message')
+logger.info('info message')
+logger.warning('warn message')
+logger.error('error message')
+logger.critical('critical message')
+
+# logging.conf:
+"""
+[loggers]
+keys=root,simpleExample
+
+[handlers]
+keys=consoleHandler
+
+[formatters]
+keys=simpleFormatter
+
+[logger_root]
+level=DEBUG
+handlers=consoleHandler
+
+[logger_simpleExample]
+level=DEBUG
+handlers=consoleHandler
+qualname=simpleExample
+propagate=0
+
+[handler_consoleHandler]
+class=StreamHandler
+level=DEBUG
+formatter=simpleFormatter
+args=(sys.stdout,)
+
+[formatter_simpleFormatter]
+format=%(asctime)s - %(name)s - %(levelname)s - %(message)s
+"""
+
 #＃　3.　A function
+#-------------------------------------------------------------------------------------------------
 def reportLogger(dir, cl_id):
     """ dir = the directory; cl_id = sample id """
     import logging
