@@ -1,0 +1,15 @@
+# get file path
+#------------------------------------------------------------------------------------
+#1
+from pathlib import Path
+script_path = Path(os.path.dirname(os.path.realpath("__file__")))
+ani_script = script_path /"ani.sh"  
+Path(os.path.dirname(os.path.realpath("__file__")))
+
+#2
+import pathlib
+a = pathlib.Path("__file__").absolute().parent
+
+# get file name
+#-----------------------------------------------------------------------------------
+cl_id = Path(query_genome).stem
